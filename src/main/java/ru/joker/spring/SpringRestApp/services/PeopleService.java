@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.joker.spring.SpringRestApp.models.Person;
 import ru.joker.spring.SpringRestApp.repositories.PeopleRepository;
+import ru.joker.spring.SpringRestApp.util.PersonNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +28,7 @@ public class PeopleService {
 
     public Person findOne(int id) {
         Optional<Person> person = peopleRepository.findById(id);
-        return person.orElse(null);
+        return person.orElseThrow(PersonNotFoundException::new);
     }
 
 }
