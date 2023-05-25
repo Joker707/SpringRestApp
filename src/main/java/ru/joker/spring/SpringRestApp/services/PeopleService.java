@@ -8,6 +8,7 @@ import ru.joker.spring.SpringRestApp.models.Person;
 import ru.joker.spring.SpringRestApp.repositories.PeopleRepository;
 import ru.joker.spring.SpringRestApp.util.PersonNotFoundException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +34,14 @@ public class PeopleService {
 
     @Transactional
     public void save(Person person) {
+        enrichPerson(person);
         peopleRepository.save(person);
+    }
+
+    private void enrichPerson(Person person) {
+        person.setCreatedAt(LocalDateTime.now());
+        person.setUpdatedAt(LocalDateTime.now());
+        person.setCreatedWho("ADMIN");
     }
 
 }
