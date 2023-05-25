@@ -31,4 +31,9 @@ public class PeopleService {
         return person.orElseThrow(PersonNotFoundException::new);
     }
 
+    @Transactional
+    public void save(Person person) {
+        peopleRepository.save(person);
+    }
+
 }

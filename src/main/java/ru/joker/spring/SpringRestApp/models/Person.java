@@ -6,6 +6,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "Person")
@@ -18,12 +22,17 @@ public class Person {
     private int id;
 
     @Column(name = "name")
+    @NotEmpty(message = "Name should not be empty!")
+    @Size(min = 2, max = 30, message = "Name size between 2 and 30 chars!")
     private String name;
 
     @Column(name = "age")
+    @Min(value = 0, message = "Value should be greater than 0!")
     private int age;
 
     @Column(name = "email")
+    @NotEmpty(message = "Email should not be empty!")
+    @Email
     private String email;
 
     public Person(String name, int age) {
